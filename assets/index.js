@@ -13,7 +13,7 @@ function getWorks() {
 function getWorksCategories() {
   return fetch(`${API_URL}/categories`)
     .then((response) => response.json())
-    .then((data) => data);
+    .then((categories) => displayPortfolioWorksCategories(categories));
 }
 
 function addWork(image, title) {
@@ -34,20 +34,18 @@ function deleteWork(id) {
   });
 }
 
-function displayPortfolioWorksCategories() {
-  getWorksCategories().then((categories) => {
-    categories.forEach((category) => {
-      const filtersElement = document.querySelector("#categories-filter");
-      const categoryElement = document.createElement("li");
-      //categoryElement.innerHTML = `<button class="filters-button" data-id=${category.id}>${category.name}</button>`;
-      const buttonElement = document.createElement("button");
-      buttonElement.classList.add("filters-button");
-      buttonElement.setAttribute("data-id", category.id);
-      buttonElement.textContent = category.name;
-      buttonElement.addEventListener("click", handleCategoryFilter);
-      categoryElement.appendChild(buttonElement);
-      filtersElement.appendChild(categoryElement);
-    });
+function displayPortfolioWorksCategories(categories) {
+  categories.forEach((category) => {
+    const filtersElement = document.querySelector("#categories-filter");
+    const categoryElement = document.createElement("li");
+    //categoryElement.innerHTML = `<button class="filters-button" data-id=${category.id}>${category.name}</button>`;
+    const buttonElement = document.createElement("button");
+    buttonElement.classList.add("filters-button");
+    buttonElement.setAttribute("data-id", category.id);
+    buttonElement.textContent = category.name;
+    buttonElement.addEventListener("click", handleCategoryFilter);
+    categoryElement.appendChild(buttonElement);
+    filtersElement.appendChild(categoryElement);
   });
 }
 
@@ -86,7 +84,7 @@ function handleCategoryFilter(event) {
 
 document.addEventListener("DOMContentLoaded", () => {
   getWorks();
-  displayPortfolioWorksCategories();
+  getWorksCategories();
 });
 
 document
