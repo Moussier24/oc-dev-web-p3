@@ -120,12 +120,20 @@
         </button>
         <div class="form-wrapper modal-content">
           <h2 class="modal-title">Ajout photo</h2>
+          <p class="form-error" id="add-work-error">
+            Erreur dans l’identifiant ou le mot de passe
+          </p>
           <div class="modal-content-wrapper">
             <form action="#" method="post" id="add-work-form">
               <label for="image">
                 <div class="upload">
                   <div class="upload-input-wrapper">
-                    <input type="file" name="image" id="image" />
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      accept="image/jpg, image/png"
+                    />
                     <i class="fa-regular fa-image upload-icon"></i>
                     <span
                       class="upload-button"
@@ -146,9 +154,9 @@
                 </div>
               </label>
               <label for="image-title">Titre</label>
-              <input type="text" name="title" id="title" />
+              <input type="text" name="title" id="title" required />
               <label for="category">Catégorie</label>
-              <select name="category" id="work-category"></select>
+              <select name="category" id="work-category" required></select>
             </form>
           </div>
         </div>

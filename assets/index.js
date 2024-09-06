@@ -15,6 +15,9 @@ function getWorks() {
 }
 
 function getWorksCategories() {
+  /* 
+    Charger les catégories des projets et les enregistrer dans le local storage
+*/
   return fetch(`${API_URL}/categories`)
     .then((response) => response.json())
     .then((categories) => {
@@ -24,7 +27,12 @@ function getWorksCategories() {
 }
 
 function addWork(formElement) {
+  /*
+    Ajouter un projet
+    */
   let workFormData = new FormData(formElement);
+  let errorMessage = document.getElementById("add-work-error");
+  errorMessage.style.display = "none";
   return fetch(`${API_URL}/works`, {
     method: "POST",
     headers: {
@@ -35,11 +43,24 @@ function addWork(formElement) {
     if (response.ok) {
       getWorks();
       resetAddForm();
+    } else {
+      if (response.status === 401) {
+        errorMessage.textContent =
+          "Vous devez être connecté pour ajouter un projet";
+      } else if (response.status === 400) {
+        errorMessage.textContent = "Veuillez remplir tous les champs";
+      } else {
+        errorMessage.textContent = "Une erreur s'est produite";
+      }
+      errorMessage.style.display = "block";
     }
   });
 }
 
 function resetAddForm() {
+  /* 
+    Réinitialiser le formulaire d'ajout de projet
+    */
   const formElement = document.querySelector("#add-work-form");
   formElement.reset();
   document.querySelector("#add-work-modal").close();
@@ -51,6 +72,9 @@ function resetAddForm() {
 }
 
 function deleteWork(id) {
+  /* 
+    Supprimer un projet
+    */
   const token = localStorage.getItem("token");
   return fetch(`${API_URL}/works/${id}`, {
     method: "DELETE",
@@ -65,6 +89,9 @@ function deleteWork(id) {
 }
 
 function displayPortfolioWorksCategories(categories) {
+  /* 
+    Afficher les catégories dans le filtre de la page d'accueil
+    */
   categories.forEach((category) => {
     const filtersElement = document.querySelector("#categories-filter");
     const categoryElement = document.createElement("li");
@@ -80,7 +107,11 @@ function displayPortfolioWorksCategories(categories) {
 }
 
 function addCategoriesOptionsToSelect(categories) {
+  /* 
+    Ajouter les catégories au select du formulaire d'ajout de projet
+    */
   const categoriesSelectElement = document.querySelector("#work-category");
+  categoriesSelectElement.innerHTML = "";
   categories.forEach((category) => {
     const optionElement = document.createElement("option");
     optionElement.value = category.id;
@@ -90,6 +121,9 @@ function addCategoriesOptionsToSelect(categories) {
 }
 
 function displayPortfolioWorks(works) {
+  /*
+    Afficher les projets dans la page d'accueil
+    */
   const galleryElement = document.querySelector("#portfolio .gallery");
   galleryElement.innerHTML = "";
   works.forEach((work) => {
@@ -103,6 +137,9 @@ function displayPortfolioWorks(works) {
 }
 
 function displayGalleryEditWorks(works) {
+  /* 
+    Afficher les projets dans la modale d'édition des projets
+    */
   const galleryElement = document.querySelector("#edit-gallery");
   galleryElement.innerHTML = "";
   works.forEach((work) => {
@@ -134,6 +171,9 @@ function displayGalleryEditWorks(works) {
 }
 
 function handleCategoryFilter(event) {
+  /* 
+    Filtrer les projets par catégorie et afficher les projets correspondants
+    */
   const filterButton = event.target;
   let categoryId = filterButton.getAttribute("data-id"); // Récupérer le id de la catégorie
   categoryId = categoryId === "all" ? categoryId : parseInt(categoryId); // Convertir le id en entier
@@ -154,6 +194,9 @@ function handleCategoryFilter(event) {
 }
 
 function checkLoginStatus() {
+  /* 
+    Vérifier si l'utilisateur est connecté et mettre à jour le dataset de la balise body
+    */
   const token = localStorage.getItem("token");
   let bodyElement = document.querySelector("body");
   if (token) {
@@ -164,6 +207,9 @@ function checkLoginStatus() {
 }
 
 function logout() {
+  /* 
+    Déconnecter l'utilisateur et rediriger vers la page d'accueil
+    */
   localStorage.removeItem("token");
   localStorage.removeItem("email");
   localStorage.removeItem("userId");
@@ -171,6 +217,9 @@ function logout() {
 }
 
 function previewInputImage() {
+  /* 
+    Afficher l'image sélectionnée dans le formulaire d'ajout de projet
+    */
   let input = document.querySelector("#image");
   let imageElement = document.querySelector("#upload-img-preview");
   let imageElementSibling = imageElement.previousElementSibling;
@@ -182,6 +231,26 @@ function previewInputImage() {
   imageElement.src = imageUrl;
   imageElementSibling.style.display = "none";
   imageElement.style.display = "block";
+}
+
+function checkAddWorkForm() {
+  /* 
+    Vérifier si le formulaire d'ajout de projet est valide
+    */
+  let formElement = document.querySelector("#add-work-form");
+  let imageInput = formElement.querySelector("#image");
+  let image = imageInput.files[0];
+  let formData = new FormData(formElement);
+  let isFormValid = true;
+  if (!image || !formData.get("title") || !formData.get("category")) {
+    isFormValid = false;
+  }
+  let submitButton = document.querySelector("#submit-work-button");
+  if (isFormValid) {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -209,6 +278,7 @@ document.querySelector("#add-work-button").addEventListener("click", () => {
   const categories = JSON.parse(localStorage.getItem("categories"));
   addCategoriesOptionsToSelect(categories);
   let addWorkDialogElement = document.querySelector("#add-work-modal");
+  checkAddWorkForm();
   previewInputImage();
   addWorkDialogElement.showModal();
 });
@@ -225,24 +295,30 @@ document
   .querySelector("#add-work-form")
   .addEventListener("input", function (event) {
     event.preventDefault();
-    let formElement = event.target.closest("form");
-    let formData = new FormData(formElement);
-    console.log(formData);
-    let isFormValid = true;
-    formData.forEach((value, key) => {
-      if (!value) {
-        isFormValid = false;
-      }
-    });
-    let submitButton = document.querySelector("#submit-work-button");
-    if (isFormValid) {
-      submitButton.disabled = false;
-    } else {
-      submitButton.disabled = true;
-    }
+    checkAddWorkForm();
   });
 
 document.querySelector("#image").addEventListener("change", function (event) {
+  let errorMessage = document.querySelector("#add-work-error");
+  errorMessage.style.display = "none";
+  if (event.target.files.length === 0) {
+    return;
+  }
+  // afficher un message d'erreur si le fichier est plus grand que 4Mo et n'est pas un jpg ou png
+  if (event.target.files[0].size > 4000000) {
+    errorMessage.textContent = "L'image ne doit pas dépasser 4Mo";
+    errorMessage.style.display = "block";
+    return;
+  }
+  if (
+    event.target.files[0].type !== "image/jpeg" &&
+    event.target.files[0].type !== "image/jpg" &&
+    event.target.files[0].type !== "image/png"
+  ) {
+    errorMessage.textContent = "L'image doit être au format jpg ou png";
+    errorMessage.style.display = "block";
+    return;
+  }
   previewInputImage();
 });
 
