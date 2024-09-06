@@ -1,72 +1,178 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-</head>
-<body>
-<header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
-</header>
-<main>
-	<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
-	</section>
-	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<ul class="filters" id="categories-filter">
-			<li>
-				<button class="filters-button filters-button-active" data-id="all">Tous</button>
-			</li>
-		</ul>
-		<div class="gallery">
-		</div>
-	</section>
-	<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
-		</form>
-	</section>
-</main>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <p id="edit-mode-flag">
+      <i class="fa-regular fa-pen-to-square"></i>
+      <span>Mode edition</span>
+    </p>
+    <header>
+      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+      <nav>
+        <ul>
+          <li>projets</li>
+          <li>contact</li>
+          <li class="hide-login"><a href="/login.html">login</a></li>
+          <li><button class="show-login" id="logout-button">logout</button></li>
+          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="introduction">
+        <figure>
+          <img src="./assets/images/sophie-bluel.png" alt="" />
+        </figure>
+        <article>
+          <h2>Designer d'espace</h2>
+          <p>
+            Je raconte votre histoire, je valorise vos idées. Je vous accompagne
+            de la conception à la livraison finale du chantier.
+          </p>
+          <p>
+            Chaque projet sera étudié en commun, de façon à mettre en valeur les
+            volumes, les matières et les couleurs dans le respect de l’esprit
+            des lieux et le choix adapté des matériaux. Le suivi du chantier
+            sera assuré dans le souci du détail, le respect du planning et du
+            budget.
+          </p>
+          <p>
+            En cas de besoin, une équipe pluridisciplinaire peut-être constituée
+            : architecte DPLG, décorateur(trice)
+          </p>
+        </article>
+      </section>
+      <section id="portfolio">
+        <div class="portfolio-title">
+          <h2>Mes Projets</h2>
+          <button class="show-login-flex" id="edit-projects-button">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <span>modifier</span>
+          </button>
+        </div>
+        <ul class="filters hide-login" id="categories-filter">
+          <li>
+            <button class="filters-button filters-button-active" data-id="all">
+              Tous
+            </button>
+          </li>
+        </ul>
+        <div class="gallery"></div>
+      </section>
+      <section id="contact" class="form-wrapper">
+        <h2>Contact</h2>
+        <p>Vous avez un projet ? Discutons-en !</p>
+        <form action="#" method="post">
+          <label for="name">Nom</label>
+          <input type="text" name="name" id="name" />
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" />
+          <label for="message">Message</label>
+          <textarea name="message" id="message" cols="30" rows="10"></textarea>
+          <button type="submit" class="button">Envoyer</button>
+        </form>
+      </section>
 
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
+      <dialog class="modal" id="edit-gallery-modal">
+        <button class="close-modal" id="close-edit-gallery-modal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="modal-content">
+          <h2 class="modal-title">Galerie photo</h2>
+          <div class="modal-content-wrapper">
+            <div class="gallery-edit" id="edit-gallery"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="button" id="add-work-button">Ajouter une photo</button>
+        </div>
+      </dialog>
 
-<script src="./assets/index.js"></script>
-</body>
+      <dialog class="modal" id="add-work-modal">
+        <button class="close-modal" id="close-add-work-modal">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <button class="close-modal goback-modal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <div class="form-wrapper modal-content">
+          <h2 class="modal-title">Ajout photo</h2>
+          <div class="modal-content-wrapper">
+            <form action="#" method="post" id="add-work-form">
+              <label for="image">
+                <div class="upload">
+                  <div class="upload-input-wrapper">
+                    <input type="file" name="image" id="image" />
+                    <i class="fa-regular fa-image upload-icon"></i>
+                    <span
+                      class="upload-button"
+                      id="upload-image-button"
+                      type="button"
+                    >
+                      <i class="fa-solid fa-plus"></i>
+                      <span>Ajouter une image</span>
+                    </span>
+                    <p class="upload-info">jpg, png : 4mo max</p>
+                  </div>
+                  <img
+                    src="/assets/images/abajour-tahina.png"
+                    alt=""
+                    class="upload-img-preview"
+                    id="upload-img-preview"
+                  />
+                </div>
+              </label>
+              <label for="image-title">Titre</label>
+              <input type="text" name="title" id="title" />
+              <label for="category">Catégorie</label>
+              <select name="category" id="work-category"></select>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="button"
+            id="submit-work-button"
+            form="add-work-form"
+            disabled
+          >
+            Valider
+          </button>
+        </div>
+      </dialog>
+    </main>
+
+    <footer>
+      <nav>
+        <ul>
+          <li>Mentions Légales</li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script src="./assets/index.js"></script>
+  </body>
 </html>
