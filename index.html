@@ -33,8 +33,12 @@
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
-          <li>projets</li>
-          <li>contact</li>
+          <li>
+            <a href="#portfolio"> projets </a>
+          </li>
+          <li>
+            <a href="#contact"> contact </a>
+          </li>
           <li class="hide-login"><a href="/login.html">login</a></li>
           <li><button class="show-login" id="logout-button">logout</button></li>
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
@@ -97,78 +101,84 @@
       </section>
 
       <dialog class="modal" id="edit-gallery-modal">
-        <button class="close-modal" id="close-edit-gallery-modal">
-          <i class="fa-solid fa-times"></i>
-        </button>
-        <div class="modal-content">
-          <h2 class="modal-title">Galerie photo</h2>
-          <div class="modal-content-wrapper">
-            <div class="gallery-edit" id="edit-gallery"></div>
+        <div class="modal-content-inner">
+          <button class="close-modal" id="close-edit-gallery-modal">
+            <i class="fa-solid fa-times"></i>
+          </button>
+          <div class="modal-content">
+            <h2 class="modal-title">Galerie photo</h2>
+            <div class="modal-content-wrapper">
+              <div class="gallery-edit" id="edit-gallery"></div>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button class="button" id="add-work-button">Ajouter une photo</button>
+          <div class="modal-footer">
+            <button class="button" id="add-work-button">
+              Ajouter une photo
+            </button>
+          </div>
         </div>
       </dialog>
 
       <dialog class="modal" id="add-work-modal">
-        <button class="close-modal" id="close-add-work-modal">
-          <i class="fa-solid fa-times"></i>
-        </button>
-        <button class="close-modal goback-modal">
-          <i class="fa-solid fa-arrow-left"></i>
-        </button>
-        <div class="form-wrapper modal-content">
-          <h2 class="modal-title">Ajout photo</h2>
-          <p class="form-error" id="add-work-error">
-            Erreur dans l’identifiant ou le mot de passe
-          </p>
-          <div class="modal-content-wrapper">
-            <form action="#" method="post" id="add-work-form">
-              <label for="image">
-                <div class="upload">
-                  <div class="upload-input-wrapper">
-                    <input
-                      type="file"
-                      name="image"
-                      id="image"
-                      accept="image/jpg, image/png"
-                    />
-                    <i class="fa-regular fa-image upload-icon"></i>
-                    <span
-                      class="upload-button"
-                      id="upload-image-button"
-                      type="button"
-                    >
-                      <i class="fa-solid fa-plus"></i>
-                      <span>Ajouter une image</span>
-                    </span>
-                    <p class="upload-info">jpg, png : 4mo max</p>
-                  </div>
-                  <img
-                    src="/assets/images/abajour-tahina.png"
-                    alt=""
-                    class="upload-img-preview"
-                    id="upload-img-preview"
-                  />
-                </div>
-              </label>
-              <label for="image-title">Titre</label>
-              <input type="text" name="title" id="title" required />
-              <label for="category">Catégorie</label>
-              <select name="category" id="work-category" required></select>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            class="button"
-            id="submit-work-button"
-            form="add-work-form"
-            disabled
-          >
-            Valider
+        <div class="modal-content-inner">
+          <button class="close-modal" id="close-add-work-modal">
+            <i class="fa-solid fa-times"></i>
           </button>
+          <button class="close-modal goback-modal">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <div class="form-wrapper modal-content">
+            <h2 class="modal-title">Ajout photo</h2>
+            <p class="form-error" id="add-work-error">
+              Erreur dans l’identifiant ou le mot de passe
+            </p>
+            <div class="modal-content-wrapper">
+              <form action="#" method="post" id="add-work-form">
+                <label for="image">
+                  <div class="upload">
+                    <div class="upload-input-wrapper">
+                      <input
+                        type="file"
+                        name="image"
+                        id="image"
+                        accept="image/jpg, image/png"
+                      />
+                      <i class="fa-regular fa-image upload-icon"></i>
+                      <span
+                        class="upload-button"
+                        id="upload-image-button"
+                        type="button"
+                      >
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Ajouter une image</span>
+                      </span>
+                      <p class="upload-info">jpg, png : 4mo max</p>
+                    </div>
+                    <img
+                      src="/assets/images/abajour-tahina.png"
+                      alt=""
+                      class="upload-img-preview"
+                      id="upload-img-preview"
+                    />
+                  </div>
+                </label>
+                <label for="image-title">Titre</label>
+                <input type="text" name="title" id="title" required />
+                <label for="category">Catégorie</label>
+                <select name="category" id="work-category" required></select>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="button"
+              id="submit-work-button"
+              form="add-work-form"
+              disabled
+            >
+              Valider
+            </button>
+          </div>
         </div>
       </dialog>
     </main>

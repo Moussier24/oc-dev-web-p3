@@ -291,6 +291,16 @@ document.querySelectorAll(".modal .close-modal").forEach((closeButton) => {
   });
 });
 
+// fermer la modale d'ajout de projet si l'utilisateur clique en dehors de la modale
+document.querySelectorAll(".modal").forEach((modal) => {
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      resetAddForm();
+      modal.close();
+    }
+  });
+});
+
 document
   .querySelector("#add-work-form")
   .addEventListener("input", function (event) {

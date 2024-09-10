@@ -3,6 +3,10 @@
    License: none (public domain)
 */
 
+html {
+	scroll-behavior: smooth;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -242,12 +246,20 @@ body[data-login="true"] #portfolio .portfolio-title {
 .modal {
 	position: fixed;
 	inset: 0;
-	padding: 80px;
-	padding-bottom: 30px;
-	border-radius: 10px;
 	border: none;
 	width: 100%;
+	background: transparent;
+}
+
+.modal .modal-content-inner {
+	position: relative;
+	padding: 80px;
 	max-width: 630px;
+	max-height: 100%;
+	padding-bottom: 30px;
+	border-radius: 10px;
+	background: white;
+	margin: auto;
 	box-sizing: border-box;
 }
 
